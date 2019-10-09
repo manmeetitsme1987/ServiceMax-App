@@ -28,7 +28,7 @@ public class FileUploadService {
 	private String bucket;
 	*/
 	
-	public FileName uploadFile(MultipartFile fileUploadReq, String attachParentId, AttachmentRequest attachmentReqeust) throws IOException{
+	public PutObjectResult uploadFile(MultipartFile fileUploadReq, String attachParentId, AttachmentRequest attachmentReqeust) throws IOException{
 		PutObjectResult putObjectResult = null;
 		String fileName = null;
 		fileName = fileUploadReq.getOriginalFilename();
@@ -38,7 +38,7 @@ public class FileUploadService {
 			fileNameObj.setFileName(fileName);
 		}
 		fileNameObj.setFileName(fileName);
-		return fileNameObj;
+		return putObjectResult;
 
 	}
 	
