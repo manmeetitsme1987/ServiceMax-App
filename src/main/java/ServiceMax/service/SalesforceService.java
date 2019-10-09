@@ -31,6 +31,11 @@ public class SalesforceService {
 	    sfconfig.setAuthEndpoint(attachmentReqeust.getSalesforce_instanceURL());
 	    sfconfig.setServiceEndpoint(attachmentReqeust.getSalesforce_instanceURL());
 	    
+	    System.out.println("attachmentReqeust.getSalesforce_username()======" + attachmentReqeust.getSalesforce_username());
+	    System.out.println("attachmentReqeust.getSalesforce_password()======" + attachmentReqeust.getSalesforce_password());
+	    System.out.println("attachmentReqeust.getSalesforce_securitytoken()======" + attachmentReqeust.getSalesforce_securitytoken());
+	    System.out.println("attachmentReqeust.getSalesforce_instanceURL()======" + attachmentReqeust.getSalesforce_instanceURL());
+	    
 	    EnterpriseConnection partnercon = null;
 	    try {
 	    	 
