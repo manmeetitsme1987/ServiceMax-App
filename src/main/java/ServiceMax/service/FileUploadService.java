@@ -49,7 +49,7 @@ public class FileUploadService {
 		amazonS3Client = new AmazonS3Client(new BasicAWSCredentials(accessKey, secretKey));
 		PutObjectRequest putObjectRequest = new PutObjectRequest(attachmentReqeust.getAws_bucket_name(), uploadKey, inputStream, new ObjectMetadata());
 		putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead);
-		putObjectRequest.getRequestClientOptions().setReadLimit(8000000);
+		putObjectRequest.getRequestClientOptions().setReadLimit(80000000);
 	
 		PutObjectResult putObjectResult = amazonS3Client.putObject(putObjectRequest);
 		IOUtils.closeQuietly(inputStream);
