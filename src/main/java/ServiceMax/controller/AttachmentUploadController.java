@@ -55,6 +55,7 @@ public class AttachmentUploadController {
 												attach.getContentType(), 
 												attach.getBody());
 					String parentName = mapAttachmentsWithParent.containsKey(attach.getId()) ? mapAttachmentsWithParent.get(attach.getId()) : attach.getId();
+					
 					PutObjectResult putObjectResult = fileUploadService.uploadFile(result, parentName, attachmentReqeust);
 					aResponse.setPutObjectResult(putObjectResult);
 					aResponse.setAttachmentId(attach.getId());
