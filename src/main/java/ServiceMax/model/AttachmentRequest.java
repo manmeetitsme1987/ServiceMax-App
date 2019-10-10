@@ -3,7 +3,7 @@ package ServiceMax.model;
 import java.util.List;
 
 public class AttachmentRequest {
-	private List<AttachmentWrapper> attachmentIds;
+	private List<AttachmentWrapper> attachmentData;
 	private String salesforce_username;
 	private String salesforce_password;
 	private String salesforce_securitytoken;
@@ -13,12 +13,12 @@ public class AttachmentRequest {
 	private String aws_secretkey;
 	
 	
-	public List<AttachmentWrapper> getAttachmentIds() {
-		return attachmentIds;
+	public List<AttachmentWrapper> getAttachmentData() {
+		return attachmentData;
 	}
 
-	public void setAttachmentIds(List<AttachmentWrapper> attachmentIds) {
-		this.attachmentIds = attachmentIds;
+	public void setAttachmentIds(List<AttachmentWrapper> attachmentData) {
+		this.attachmentData = attachmentData;
 	}
 
 	public String getSalesforce_username() {

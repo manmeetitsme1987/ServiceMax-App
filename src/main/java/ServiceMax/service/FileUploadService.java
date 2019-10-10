@@ -28,11 +28,11 @@ public class FileUploadService {
 	private String bucket;
 	*/
 	
-	public PutObjectResult uploadFile(MultipartFile fileUploadReq, String attachParentId, AttachmentRequest attachmentReqeust) throws IOException{
+	public PutObjectResult uploadFile(MultipartFile fileUploadReq, String attachParentName, AttachmentRequest attachmentReqeust) throws IOException{
 		PutObjectResult putObjectResult = null;
 		String fileName = null;
 		fileName = fileUploadReq.getOriginalFilename();
-		putObjectResult = upload(fileUploadReq.getInputStream(), attachParentId + "/" +fileUploadReq.getOriginalFilename(), attachmentReqeust);
+		putObjectResult = upload(fileUploadReq.getInputStream(), attachParentName + "/" +fileUploadReq.getOriginalFilename(), attachmentReqeust);
 		FileName fileNameObj = new FileName();
 		if(putObjectResult != null){
 			fileNameObj.setFileName(fileName);

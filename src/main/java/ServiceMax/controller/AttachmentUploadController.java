@@ -1,7 +1,9 @@
 package ServiceMax.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,8 +43,9 @@ public class AttachmentUploadController {
 			EnterpriseConnection connection = salesforceService.createConnectionToSalesforceOrg(attachmentReqeust);
 			System.out.println("connection=====" + connection.toString());
 			List<AttachmentInnerResponse> listAttachmentResponse = new ArrayList<AttachmentInnerResponse>();
+			Map<String, String> mapAttachmentsWithParent = new HashMap<String, String>();
 			if(connection != null){
-				List<Attachment> listAttachments = salesforceService.fetchAttachments(connection, attachmentReqeust.getAttachmentIds());
+				List<Attachment> listAttachments = salesforceService.fetchAttachments(connection, attachmentReqeust.getAttachmentData(), mapAttachmentsWithParent);
 				//Attachment attach = listAttachments.get(0);
 				for(Attachment attach : listAttachments){
 					AttachmentInnerResponse aResponse = new AttachmentInnerResponse();
@@ -51,8 +54,12 @@ public class AttachmentUploadController {
 												attach.getName(), 
 												attach.getContentType(), 
 												attach.getBody());
-					PutObjectResult putObjectResult = fileUploadService.uploadFile(result, attach.getParentId(), attachmentReqeust);
+					String parentName = mapAttachmentsWithParent.containsKey(attach.getId()) ? mapAttachmentsWithParent.get(attach.getId()) : attach.getId();
+					PutObjectResult putObjectResult = fileUploadService.uploadFile(result, parentName, attachmentReqeust);
 					aResponse.setPutObjectResult(putObjectResult);
+					aResponse.setAttachmentId(attach.getId());
+					aResponse.setParentName(parentName);
+					aResponse.setAttachName(attach.getName());
 					listAttachmentResponse.add(aResponse);
 				}
 				attachmentResponse.setAttachment(listAttachmentResponse);

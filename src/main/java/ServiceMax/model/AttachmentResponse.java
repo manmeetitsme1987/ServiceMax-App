@@ -21,8 +21,4 @@ public class AttachmentResponse {
 		this.attachment = attachment;
 	}
 	
-	
-	
-	
-	
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -48,10 +49,10 @@ public class SalesforceService {
 	    return partnercon;
 	}
 	
-	public  List<Attachment> fetchAttachments(EnterpriseConnection partnercon, List<AttachmentWrapper> attadhmentRequests){
+	public  List<Attachment> fetchAttachments(EnterpriseConnection partnercon, List<AttachmentWrapper> attadhmentRequests, Map<String, String> mapAttachmentsWithParent){
 		List<Attachment> listAttachments = new ArrayList<Attachment>();
 		try{
-			String query = "select Id, Name, Body, ParentId, BodyLength, ContentType, "+
+			String query = "Select Id, Parent.Name, ParentId, Name, Description, ContentType, BodyLength, Body, OwnerId, "+
 							" Description from Attachment ";
 			
 			String attachmentIds = "";
@@ -61,6 +62,7 @@ public class SalesforceService {
 	            }else{
 	            	attachmentIds += ",'" + reqObj.getAttachmentId() + "'";
 	            }
+	            mapAttachmentsWithParent.put(reqObj.getAttachmentId(), reqObj.getParentName());
 	        }
 			query += " where id in (" + attachmentIds + ")";
 			QueryResult describeGlobalResult = partnercon.query(query);
