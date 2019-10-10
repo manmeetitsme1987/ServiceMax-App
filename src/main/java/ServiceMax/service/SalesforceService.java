@@ -52,7 +52,7 @@ public class SalesforceService {
 	public  List<Attachment> fetchAttachments(EnterpriseConnection partnercon, List<AttachmentWrapper> attadhmentRequests, Map<String, String> mapAttachmentsWithParent){
 		List<Attachment> listAttachments = new ArrayList<Attachment>();
 		try{
-			String query = "Select Id, Parent.Name, ParentId, Name, Description, ContentType, BodyLength, Body, OwnerId, "+
+			String query = "Select Id, Parent.Name, ParentId, Name, ContentType, BodyLength, Body, OwnerId, "+
 							" Description from Attachment ";
 			
 			String attachmentIds = "";
